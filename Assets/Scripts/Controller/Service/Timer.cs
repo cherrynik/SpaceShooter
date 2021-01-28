@@ -22,10 +22,15 @@ public class Timer : MonoBehaviour {
   public string GetTimeFormatted() {
     int total = (int) Math.Round(_timeout);
 
-    int minutes = (int) (_timeout > 60 ? Math.Round((float) total / 60) : 0);
+    int minutes = (int) (_timeout >= 59
+      ? Math.Round(Math.Floor((float) total / 60))
+      : 0);
+
     int seconds = total % 60;
 
-    return $"{FormatTime(minutes)}:{FormatTime(seconds)}";
+    return (_timeout != .0f)
+      ? $"{FormatTime(minutes)}:{FormatTime(seconds)}"
+      : "NEW BOSS IS HERE";
   }
 
   private string FormatTime(int time) => time <= 9 ? $"0{time}" : $"{time}";

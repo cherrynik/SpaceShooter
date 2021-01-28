@@ -10,7 +10,7 @@ public class Movement : MonoBehaviour {
   private void Start() { _body = GetComponent<Rigidbody2D>(); }
 
   private void FixedUpdate() {
-    float moveY = Input.GetAxisRaw("Vertical");
+    float moveY = Input.GetAxis("Vertical");
 
     if (moveY == 0) return;
 

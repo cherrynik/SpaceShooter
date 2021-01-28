@@ -11,16 +11,12 @@ public class Creature : MonoBehaviour {
   [SerializeField, Range(50, 100)] protected int      damage;
   protected                                  int      armor;
   protected                                  Skill[ ] skills;
-  private                                    State    _gameState;
 
   public int Health => health;
   public int Armor  => armor;
   public int Damage => damage;
 
   // TODO: skills activation
-  private void Start() {
-    _gameState = GameObject.FindWithTag("GameController").GetComponent<State>();
-  }
 
 
 }
