@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -24,9 +25,8 @@ public class Hud : MonoBehaviour {
     health.text = $"HP {_player.Health}";
     timer.text  = _timer.GetTimeFormatted();
 
-    // float text                  = (float) Round(_player.Tim, 1);
-    // if (text != .0f) timeout.text = $"Timeout {text}";
-    // else timeout.text             = "Timeout 0,0";
+    float text                  = (float) Math.Round(_player.Shooting.Timer, 1);
+    timeout.text = text != .0f ? $"Timeout {text}" : "Timeout 0,0";
   }
 
 

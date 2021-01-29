@@ -11,12 +11,27 @@ public class Shooting : MonoBehaviour {
   [SerializeField]                 private Transform point;
   private                                  float     _timer;
 
-  public int   Speed => speed;
-  public float Timer => _timer;
+  public int Speed {
+    get => speed;
+    set => speed = value;
+  }
 
-  private void Start() { _timer = timeout; }
+  public float Timer {
+    get => _timer;
+    set => _timer = value;
+  }
 
-  private void Update() {
+  private void Start() => _timer = timeout;
+
+  private void Update() => Shoot();
+
+  private float RefreshTimer(float timer, float val) {
+    if (timer < val) return timer + Time.deltaTime;
+
+    return val;
+  }
+
+  private void Shoot() {
     bool keyPressed = Input.GetKey(KeyCode.Space);
     _timer = RefreshTimer(_timer, timeout);
 
@@ -25,12 +40,6 @@ public class Shooting : MonoBehaviour {
 
     Instantiate(bulletObject, point.position, this.transform.rotation);
     _timer = 0;
-  }
-
-  public float RefreshTimer(float timer, float val) {
-    if (timer < val) return timer += Time.deltaTime;
-
-    return val;
   }
 
 

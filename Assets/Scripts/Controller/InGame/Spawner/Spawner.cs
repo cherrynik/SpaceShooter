@@ -14,8 +14,8 @@ public class Spawner : MonoBehaviour {
   }
 
   public void SpawnObject() {
-    const int minY = 5;
-    const int maxY = 95;
+    const int minY = 15;
+    const int maxY = 85;
     
     int i = new Random().Next(0, FlyingObjects.Length);
 
