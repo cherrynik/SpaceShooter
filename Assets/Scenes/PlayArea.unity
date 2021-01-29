@@ -467,6 +467,7 @@ MonoBehaviour:
   minY: 3.5
   maxY: 7
   smoothTime: 1
+  isCentered: 0
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -1062,10 +1063,10 @@ RectTransform:
   m_Father: {fileID: 949561994}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -7, y: -101}
-  m_SizeDelta: {x: -2107.5046, y: 93.24927}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: -7, y: -100}
+  m_SizeDelta: {x: 1732.4954, y: 94.24927}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2025552641
 MonoBehaviour:
@@ -1089,13 +1090,13 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 55
-    m_FontStyle: 1
-    m_BestFit: 0
-    m_MinSize: 10
-    m_MaxSize: 156
+    m_FontSize: 56
+    m_FontStyle: 0
+    m_BestFit: 1
+    m_MinSize: 0
+    m_MaxSize: 56
     m_Alignment: 1
-    m_AlignByGeometry: 0
+    m_AlignByGeometry: 1
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1

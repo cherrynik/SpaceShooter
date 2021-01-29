@@ -4,11 +4,11 @@ using Random = System.Random;
 public class FlyingObject : MonoBehaviour {
 
 
-  [SerializeField, Range(1, 10)] private int    speed     = 3;
-  [SerializeField, Range(1, 90)] private int    rotateOn  = 15;
-  [SerializeField]               private string target    = "Player";
-  private                                float  _lifeTime = 10f;
-  private                                bool   _isGood;
+  [SerializeField] private string target    = "Player";
+  private                  int    speed     = 3;
+  private                  int    rotateOn  = 20;
+  private                  float  _lifeTime = 10f;
+  private                  bool   _isGood;
 
   private void Start() {
     GenerateSpeed();
@@ -26,9 +26,38 @@ public class FlyingObject : MonoBehaviour {
     // TODO: handler touching with player: up/de- grade
     Destroy(this.gameObject);
   }
-  
-  private void GenerateSpeed()   => speed   = new Random().Next(3, 6);
-  private void GenerateQuality() => _isGood = new Random().Next(0, 2) == 1;
+
+  private void GenerateSpeed() {
+    speed    = new Random().Next(2,  6);
+    rotateOn = new Random().Next(10, 26);
+
+    // size depending from speed;
+    // switch (speed) {
+    //   case 2:
+    //   case 3:
+    //     this.gameObject.transform.localScale = new Vector3(2, 2, 2);
+    //
+    //     break;
+    //   case 4:
+    //     this.gameObject.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+    //
+    //     break;
+    //   case 5:
+    //     this.gameObject.transform.localScale = new Vector3(1f, 1f, 1f);
+    //
+    //     break;
+    // }
+  }
+
+  private void GenerateQuality() {
+    _isGood = new Random().Next(0, 2) == 1;
+
+    // Example behaviour of sprite from object's quality
+    this.gameObject.GetComponent<SpriteRenderer>().color =
+      _isGood
+        ? new Color(.5f, 1f,  .5f)
+        : new Color(1f,  .5f, .5f);
+  }
 
   private void Move() {
     Quaternion rotation = this.transform.rotation;
