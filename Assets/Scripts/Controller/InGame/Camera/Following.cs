@@ -9,7 +9,7 @@ public class Following : MonoBehaviour {
   [SerializeField]                private float     maxY       = 7f;
   [SerializeField, Range(.1f, 2)] private float     smoothTime = .5f;
   [SerializeField]                private bool      isCentered = false;
-  private                                 float     uncenteredHorizontal;
+  private                                 float     _uncenteredHorizontal;
   private                                 Vector3   _velocity = Vector3.zero;
 
   public bool IsCentered {
@@ -17,12 +17,12 @@ public class Following : MonoBehaviour {
     set => isCentered = value;
   }
 
-  private void Start() { uncenteredHorizontal = this.transform.position.x; }
+  private void Start() => _uncenteredHorizontal = this.transform.position.x;
 
   private void FixedUpdate() {
     Vector3 targetPosition = target.position;
 
-    if (!isCentered) targetPosition.x = uncenteredHorizontal;
+    if (!isCentered) targetPosition.x = _uncenteredHorizontal;
     targetPosition.y = Mathf.Clamp(target.position.y, minY, maxY);
     targetPosition.z = this.transform.position.z;
 
