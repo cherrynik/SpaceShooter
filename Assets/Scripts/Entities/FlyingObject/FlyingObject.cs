@@ -5,9 +5,9 @@ public class FlyingObject : MonoBehaviour {
 
 
   [SerializeField] private string target    = "Player";
-  private                  int    speed     = 3;
-  private                  int    rotateOn  = 20;
-  private                  float  _lifeTime = 10f;
+  [SerializeField] private float  lifeTime  = 30f;
+  private                  int    _speed    = 3;
+  private                  int    _rotateOn = 20;
   private                  bool   _isGood;
 
   private void Start() {
@@ -24,12 +24,15 @@ public class FlyingObject : MonoBehaviour {
     if (!other.gameObject.CompareTag(target)) return;
 
     // TODO: handler touching with player: up/de- grade
+    Player player = other.gameObject.GetComponent<Player>();
+
+    player.Graduate(_isGood);
     Destroy(this.gameObject);
   }
 
   private void GenerateSpeed() {
-    speed    = new Random().Next(2,  6);
-    rotateOn = new Random().Next(10, 26);
+    _speed    = new Random().Next(2,  6);
+    _rotateOn = new Random().Next(10, 26);
 
     // size depending from speed;
     // switch (speed) {
@@ -63,21 +66,21 @@ public class FlyingObject : MonoBehaviour {
     Quaternion rotation = this.transform.rotation;
 
     this.transform.Translate(
-      Vector2.left * (speed * Time.deltaTime),
+      Vector2.left * (_speed * Time.deltaTime),
       Space.World
     );
 
     this.transform.Rotate(
       rotation.x,
       rotation.y,
-      (rotation.z + rotateOn) * Time.deltaTime,
+      (rotation.z + _rotateOn) * Time.deltaTime,
       Space.Self
     );
   }
 
   private void RunLifeTime() {
-    _lifeTime -= Time.deltaTime;
-    if (_lifeTime <= 0) Destroy(this.gameObject);
+    lifeTime -= Time.deltaTime;
+    if (lifeTime <= 0) Destroy(this.gameObject);
   }
 
 

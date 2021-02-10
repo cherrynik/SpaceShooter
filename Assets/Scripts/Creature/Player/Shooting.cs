@@ -6,8 +6,8 @@ public class Shooting : MonoBehaviour {
   [Header("Shooting properties:"), SerializeField]
   private GameObject bulletObject;
 
-  [SerializeField, Range(.1f, 1f)] private float     timeout = .5f;
-  [SerializeField, Range(20,  50)] private int       speed   = 20;
+  [SerializeField, Range(.1f, 2)]  private float     timeout = .5f;
+  [SerializeField, Range(1,   50)] private int       speed   = 20;
   [SerializeField]                 private Transform point;
   private                                  float     _timer;
 
@@ -19,6 +19,11 @@ public class Shooting : MonoBehaviour {
   public float Timer {
     get => _timer;
     set => _timer = value;
+  }
+
+  public float Timeout {
+    get => timeout;
+    set => timeout = value;
   }
 
   private void Start() => _timer = timeout;

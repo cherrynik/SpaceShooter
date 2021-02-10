@@ -6,7 +6,7 @@ public class State : MonoBehaviour {
 
 
   // [SerializeField, Range(0, 2)]  private float multiplier = 1.5f;
-  [SerializeField, Range(1, 60)] private int timeout = 15;
+  [SerializeField, Range(1, 60)] private int timeout = 45;
   private                                int _wave   = 0;
   private                                int _score  = 0;
 

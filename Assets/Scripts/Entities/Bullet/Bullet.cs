@@ -1,9 +1,10 @@
+using System;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour {
 
 
-  [SerializeField, Range(1, 5)] private float    _lifeTime = 1f;
+  [SerializeField, Range(1, 5)] private float    lifeTime = 1f;
   private                               Shooting _shot;
   private                               int      _speed = 20;
 
@@ -13,7 +14,7 @@ public class Bullet : MonoBehaviour {
   }
 
   private void Update() {
-    if (_lifeTime <= .0f) Destroy(this.gameObject);
+    if (lifeTime <= .0f) Destroy(this.gameObject);
     Move();
 
     // TODO: Collision & damage
@@ -24,7 +25,7 @@ public class Bullet : MonoBehaviour {
       Vector2.right * (_speed * Time.deltaTime)
     );
 
-    _lifeTime -= Time.deltaTime;
+    lifeTime -= Time.deltaTime;
   }
 
 
