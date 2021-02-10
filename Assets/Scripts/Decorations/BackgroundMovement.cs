@@ -15,6 +15,7 @@ public class BackgroundMovement : MonoBehaviour {
     set => speed = value;
   }
 
+  // TODO: Parallax effect
   private void Start() {
     _firstPosition = background.transform.position;
 
