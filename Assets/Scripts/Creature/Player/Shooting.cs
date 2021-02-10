@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class Shooting : MonoBehaviour {
 
@@ -10,6 +11,7 @@ public class Shooting : MonoBehaviour {
   [SerializeField, Range(1,   50)] private int       speed   = 20;
   [SerializeField]                 private Transform point;
   private                                  float     _timer;
+  private                                  int       _damage;
 
   public int Speed {
     get => speed;
@@ -24,6 +26,11 @@ public class Shooting : MonoBehaviour {
   public float Timeout {
     get => timeout;
     set => timeout = value;
+  }
+
+  public int Damage {
+    get => _damage;
+    set => _damage = value;
   }
 
   private void Start() => _timer = timeout;

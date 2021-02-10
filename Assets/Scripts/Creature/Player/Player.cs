@@ -9,13 +9,10 @@ public class Player : Creature {
 
   public Shooting Shooting => _shooting;
 
-  public int Level {
-    get => level;
-    set => level = value;
-  }
+  public int Level => level;
 
   // TODO: skills activation
-  private void Start() { _shooting = GetComponent<Shooting>(); }
+  private void Start() => _shooting = GetComponent<Shooting>();
 
   public void Graduate(bool toUpgrade) {
     switch (toUpgrade) {
@@ -29,28 +26,28 @@ public class Player : Creature {
 
     if ((operationIndex == 0) ||
         (operationIndex == 3) ||
-        (operationIndex == 4)) {
-      if ((!toUpgrade && (health > 100)) || toUpgrade) health += op * 100;
-    }
+        (operationIndex == 4))
+      if ((!toUpgrade && (health > 100)) || toUpgrade)
+        health += op * 100;
 
     if ((operationIndex == 1) ||
         (operationIndex == 3) ||
-        (operationIndex == 5)) {
-      if ((!toUpgrade && (armor > 0)) || toUpgrade) armor += op * 150;
-    }
+        (operationIndex == 5))
+      if ((!toUpgrade && (armor > 0)) || toUpgrade)
+        armor += op * 150;
 
     if ((operationIndex == 2) ||
         (operationIndex == 4) ||
-        (operationIndex == 5)) {
-      if ((!toUpgrade && (damage > 250)) || toUpgrade) damage += op * 250;
-    }
+        (operationIndex == 5))
+      if ((!toUpgrade && (damage > 250)) || toUpgrade)
+        _shooting.Damage += op * 250;
 
     if (operationIndex == 6) {
       if ((_shooting.Timeout > .1f) &&
           (_shooting.Timeout < 2)) _shooting.Timeout += -op * .1f;
     }
 
-    if (operationIndex == 7) Debug.Log(toUpgrade ? "Unluck!" : "Luck!");
+    if (operationIndex == 7) Debug.Log(toUpgrade ? "Unluck" : "Luck!");
     else level += op;
   }
 

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Random = System.Random;
 
@@ -9,6 +10,11 @@ public class FlyingObject : MonoBehaviour {
   private                  int    _speed    = 3;
   private                  int    _rotateOn = 20;
   private                  bool   _isGood;
+
+  public float LifeTime {
+    get => lifeTime;
+    set => lifeTime = value;
+  }
 
   private void Start() {
     GenerateSpeed();
@@ -23,33 +29,24 @@ public class FlyingObject : MonoBehaviour {
   private void OnTriggerEnter2D(Collider2D other) {
     if (!other.gameObject.CompareTag(target)) return;
 
-    // TODO: handler touching with player: up/de- grade
     Player player = other.gameObject.GetComponent<Player>();
-
     player.Graduate(_isGood);
     Destroy(this.gameObject);
   }
 
   private void GenerateSpeed() {
-    _speed    = new Random().Next(2,  6);
+    _speed    = new Random().Next(1,  7);
     _rotateOn = new Random().Next(10, 26);
 
     // size depending from speed;
-    // switch (speed) {
-    //   case 2:
-    //   case 3:
-    //     this.gameObject.transform.localScale = new Vector3(2, 2, 2);
-    //
-    //     break;
-    //   case 4:
-    //     this.gameObject.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
-    //
-    //     break;
-    //   case 5:
-    //     this.gameObject.transform.localScale = new Vector3(1f, 1f, 1f);
-    //
-    //     break;
-    // }
+    this.gameObject.transform.localScale = _speed switch {
+      1 => new Vector3(3,    3,    3),
+      2 => new Vector3(2.5f, 2.5f, 2.5f),
+      3 => new Vector3(2,    2,    2),
+      4 => new Vector3(1.5f, 1.5f, 1.5f),
+      5 => new Vector3(1,    1,    1),
+      6 => new Vector3(.5f,  .5f,  .5f),
+    };
   }
 
   private void GenerateQuality() {

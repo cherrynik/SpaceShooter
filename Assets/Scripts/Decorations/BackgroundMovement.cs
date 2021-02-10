@@ -26,10 +26,10 @@ public class BackgroundMovement : MonoBehaviour {
   private void FixedUpdate() {
     Vector3 position = background.transform.position;
 
-      position =
-        (position.x <= _limitPosition) && looped
-          ? _firstPosition
-          : position + (_direction * (speed * Time.fixedDeltaTime));
+    position =
+      (position.x <= _limitPosition) && looped
+        ? _firstPosition
+        : position + (_direction * (speed * Time.fixedDeltaTime));
 
 
     background.transform.position = position;

@@ -15,9 +15,10 @@ public class Hud : MonoBehaviour {
   private                  Timer      _timer;
 
   private void Start() {
-    if (!gameController)
+    if (!gameController) {
       gameController = GameObject.FindWithTag("GameController").
         GetComponent<Controller>();
+    }
 
     _player = gameController.Player;
     _timer  = gameController.GetComponent<Timer>();
@@ -29,7 +30,7 @@ public class Hud : MonoBehaviour {
     armor.text  = $"Armor {_player.Armor}";
     level.text  = $"Level {_player.Level}";
 
-    float text                  = (float) Math.Round(_player.Shooting.Timer, 1);
+    float text = (float) Math.Round(_player.Shooting.Timer, 1);
     timeout.text = text != .0f ? $"Timeout {text}" : "Timeout 0,0";
   }
 

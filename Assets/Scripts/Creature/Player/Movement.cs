@@ -3,13 +3,12 @@ using UnityEngine;
 public class Movement : MonoBehaviour {
 
 
-  [SerializeField, Range(1, 20)] private int speed = 15;
-
-  private Rigidbody2D _body;
+  [SerializeField, Range(1, 20)] private int         speed = 15;
+  private                                Rigidbody2D _body;
 
   private void Start() { _body = GetComponent<Rigidbody2D>(); }
 
-  private void FixedUpdate() {
+  private void Update() {
     float moveY = Input.GetAxis("Vertical");
 
     if (moveY == 0) return;

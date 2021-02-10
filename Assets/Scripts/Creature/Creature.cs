@@ -1,6 +1,4 @@
-using System;
 using UnityEngine;
-using Random = System.Random;
 
 public class Creature : MonoBehaviour {
 
@@ -12,11 +10,34 @@ public class Creature : MonoBehaviour {
   protected                                  int      armor;
   protected                                  Skill[ ] skills;
 
-  public int Health => health;
+  private readonly float _limitX       = 9.5f;
+  private readonly float _defaultSpeed = .5f;
+
+  public int Health {
+    get => health;
+    set => health = value;
+  }
+
   public int Armor  => armor;
   public int Damage => damage;
 
-  // TODO: skills activation
+  // TODO: Skills activation
+  // TODO: Init specs
+  private void Update() { FirstMove(); }
+
+  private void FirstMove() {
+    if (this.gameObject.transform.position.x <= _limitX) return;
+
+    Vector3 transformPosition = this.gameObject.transform.position;
+
+    transformPosition.x = Mathf.Lerp(
+      transformPosition.x,
+      _limitX,
+      _defaultSpeed * Time.deltaTime
+    );
+
+    this.gameObject.transform.position = transformPosition;
+  }
 
 
 }

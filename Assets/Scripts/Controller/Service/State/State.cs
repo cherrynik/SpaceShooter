@@ -6,7 +6,7 @@ public class State : MonoBehaviour {
 
 
   // [SerializeField, Range(0, 2)]  private float multiplier = 1.5f;
-  [SerializeField, Range(1, 60)] private int timeout = 45;
+  [SerializeField, Range(1, 60)] private int timeout = 5;
   private                                int _wave   = 0;
   private                                int _score  = 0;
 
@@ -44,9 +44,8 @@ public class State : MonoBehaviour {
     _timer.Timeout              = seconds;
     _cameraFollowing.IsCentered = true;
 
-    while (_background.Speed < 5) {
+    while (_background.Speed < 5)
       _background.Speed += Time.smoothDeltaTime * .5f;
-    }
   }
 
   private void StartWave() {
@@ -54,12 +53,11 @@ public class State : MonoBehaviour {
     _background.Speed           = 1;
     _isBreak                    = false;
     _cameraFollowing.IsCentered = false;
-    
-    while (_background.Speed > 1) {
-      _background.Speed -= Time.smoothDeltaTime * .5f;
-    }
 
-    // _gameController.Spawner.SpawnBoss();
+    while (_background.Speed > 1)
+      _background.Speed -= Time.smoothDeltaTime * .5f;
+
+    _gameController.Spawner.SpawnEnemy();
   }
 
   private void SpawnObject(int minInterval, int maxInterval) {

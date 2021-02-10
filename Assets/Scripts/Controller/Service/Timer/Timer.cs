@@ -28,7 +28,7 @@ public class Timer : MonoBehaviour {
 
     int seconds = total % 60;
 
-    return (_timeout != .0f)
+    return _timeout != .0f
       ? $"{FormatTime(minutes)}:{FormatTime(seconds)}"
       : "NEW BOSS IS HERE";
   }
