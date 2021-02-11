@@ -6,7 +6,7 @@ public class State : MonoBehaviour {
 
 
   // [SerializeField, Range(0, 2)]  private float multiplier = 1.5f;
-  [SerializeField, Range(1, 60)] private int timeout = 5;
+  [SerializeField, Range(1, 60)] private int timeout = 15;
   private                                int _wave   = 0;
   private                                int _score  = 0;
 
@@ -16,10 +16,16 @@ public class State : MonoBehaviour {
   private Timer              _timer;
   private float              _interval;
   private bool               _isBreak;
+  private bool               _isKilled;
 
   public int Timeout => timeout;
   public int Wave    => _wave;
   public int Score   => _score;
+
+  public bool IsKilled {
+    get => _isKilled;
+    set => _isKilled = value;
+  }
 
   // TODO: working timeout, switching waves, recording scores
   private void Start() {
@@ -37,12 +43,17 @@ public class State : MonoBehaviour {
   private void Update() {
     if ((_timer.Timeout == 0) && _isBreak) StartWave();
     else if (_timer.Timeout > 5) SpawnObject(100, 500);
+    else if (_isKilled) {
+      timeout = timeout < 60 ? timeout + 15 : 60;
+      InitTimer(timeout);
+    }
   }
 
   private void InitTimer(int seconds) {
     _isBreak                    = true;
     _timer.Timeout              = seconds;
     _cameraFollowing.IsCentered = true;
+    _isKilled                   = false;
 
     while (_background.Speed < 5)
       _background.Speed += Time.smoothDeltaTime * .5f;

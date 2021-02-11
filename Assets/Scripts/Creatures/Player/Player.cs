@@ -1,18 +1,19 @@
-﻿using UnityEngine;
+using System;
+using UnityEngine;
 using Random = System.Random;
 
 public class Player : Creature {
 
 
   [SerializeField, Range(1, 99)] private int      level = 1;
-  private                                Shooting _shooting;
+  [SerializeField]               private Shooting shooting;
 
-  public Shooting Shooting => _shooting;
-
-  public int Level => level;
+  public int      Level    => level;
+  public Shooting Shooting => shooting;
 
   // TODO: skills activation
-  private void Start() => _shooting = GetComponent<Shooting>();
+
+  private void Start() { shooting.Damage = 75; }
 
   public void Graduate(bool toUpgrade) {
     switch (toUpgrade) {
@@ -40,11 +41,11 @@ public class Player : Creature {
         (operationIndex == 4) ||
         (operationIndex == 5))
       if ((!toUpgrade && (damage > 250)) || toUpgrade)
-        _shooting.Damage += op * 250;
+        shooting.Damage += op * 250;
 
     if (operationIndex == 6) {
-      if ((_shooting.Timeout > .1f) &&
-          (_shooting.Timeout < 2)) _shooting.Timeout += -op * .1f;
+      if ((shooting.Timeout > .1f) &&
+          (shooting.Timeout < 2)) shooting.Timeout += -op * .1f;
     }
 
     if (operationIndex == 7) Debug.Log(toUpgrade ? "Unluck" : "Luck!");
