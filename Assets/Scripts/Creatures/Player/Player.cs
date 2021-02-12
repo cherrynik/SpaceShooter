@@ -19,36 +19,52 @@ public class Player : Creature {
     switch (toUpgrade) {
       case true when level >= 99:
       case false when level == 1:
+        Debug.Log("Your lvl is bordered");
         return;
     }
 
     int op             = toUpgrade ? 1 : -1;
     int operationIndex = new Random().Next(8);
 
-    if ((operationIndex == 0) ||
-        (operationIndex == 3) ||
-        (operationIndex == 4))
-      if ((!toUpgrade && (health > 100)) || toUpgrade)
-        health += op * 100;
+    switch (operationIndex) {
+      case 0:
+      case 3:
+      case 4: {
+        if ((!toUpgrade && (health > 100)) || toUpgrade) health += op * 100;
 
-    if ((operationIndex == 1) ||
-        (operationIndex == 3) ||
-        (operationIndex == 5))
-      if ((!toUpgrade && (armor > 0)) || toUpgrade)
-        armor += op * 150;
-
-    if ((operationIndex == 2) ||
-        (operationIndex == 4) ||
-        (operationIndex == 5))
-      if ((!toUpgrade && (damage > 250)) || toUpgrade)
-        shooting.Damage += op * 250;
-
-    if (operationIndex == 6) {
-      if ((shooting.Timeout > .1f) &&
-          (shooting.Timeout < 2)) shooting.Timeout += -op * .1f;
+        break;
+      }
     }
 
-    if (operationIndex == 7) Debug.Log(toUpgrade ? "Unluck" : "Luck!");
+    switch (operationIndex) {
+      case 1:
+      case 3:
+      case 5: {
+        if ((!toUpgrade && (armor > 0)) || toUpgrade) armor += op * 150;
+
+        break;
+      }
+    }
+
+    switch (operationIndex) {
+      case 2:
+      case 4:
+      case 5: {
+        if ((!toUpgrade && (damage > 250)) || toUpgrade)
+          shooting.Damage += op * 250;
+
+        break;
+      }
+
+      case 6: {
+        if ((shooting.Timeout > .19f) &&
+            (shooting.Timeout < 2)) shooting.Timeout += -op * .1f;
+
+        break;
+      }
+    }
+
+    if (operationIndex == 7) Debug.Log(toUpgrade ? "Unluck..." : "Luck!");
     else level += op;
   }
 

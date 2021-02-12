@@ -33,9 +33,8 @@ public class Enemy : Creature {
 
   private void InitLife() {
     int gameWave = _gameState.Wave;
-    armor = 250;
-    health = 200;
-    Debug.Log(gameWave);
+    armor = 6000;
+    health = 2000;
   }
 
   public void CheckLife() {

@@ -18,14 +18,15 @@ public class State : MonoBehaviour {
   private bool               _isBreak;
   private bool               _isKilled;
 
-  public int Timeout => timeout;
-  public int Wave    => _wave;
-  public int Score   => _score;
-
+  public int  Timeout => timeout;
+  public int  Wave    => _wave;
+  public int  Score   => _score;
+  public bool IsBreak => _isBreak;
   public bool IsKilled {
     get => _isKilled;
     set => _isKilled = value;
   }
+
 
   // TODO: working timeout, switching waves, recording scores
   private void Start() {
@@ -44,7 +45,8 @@ public class State : MonoBehaviour {
     if ((_timer.Timeout == 0) && _isBreak) StartWave();
     else if (_timer.Timeout > 5) SpawnObject(100, 500);
     else if (_isKilled) {
-      timeout = timeout < 60 ? timeout + 15 : 60;
+      _score  += new Random().Next(5000, 9000);
+      timeout =  timeout < 60 ? timeout + 15 : 60;
       InitTimer(timeout);
     }
   }

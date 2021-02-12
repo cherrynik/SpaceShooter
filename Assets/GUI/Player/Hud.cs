@@ -10,9 +10,12 @@ public class Hud : MonoBehaviour {
   [SerializeField] private Text       level;
   [SerializeField] private Text       timer;
   [SerializeField] private Text       timeout;
+  [SerializeField] private Text       score;
+  [SerializeField] private Text       wave;
   [SerializeField] private Controller gameController;
   private                  Player     _player;
   private                  Timer      _timer;
+  private                  State      _gameState;
 
   private void Start() {
     if (!gameController) {
@@ -20,8 +23,9 @@ public class Hud : MonoBehaviour {
         GetComponent<Controller>();
     }
 
-    _player = gameController.Player;
-    _timer  = gameController.GetComponent<Timer>();
+    _player    = gameController.Player;
+    _timer     = gameController.GetComponent<Timer>();
+    _gameState = gameController.GetComponent<State>();
   }
 
   private void Update() {
@@ -32,6 +36,11 @@ public class Hud : MonoBehaviour {
 
     float text = (float) Math.Round(_player.Shooting.Timer, 1);
     timeout.text = text != .0f ? $"Timeout {text}" : "Timeout 0,0";
+    score.text   = $"Score: {_gameState.Score}";
+
+    wave.text = _gameState.IsBreak
+      ? $"Wave {_gameState.Wave + 1}"
+      : $"Wave {_gameState.Wave}";
   }
 
 
